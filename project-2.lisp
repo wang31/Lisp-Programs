@@ -1,0 +1,57 @@
+(defun isMember (q list)
+  (cond ((null list) nil)
+	((equal q (car list)) t)
+	(t (isMember q (cdr list)))))
+
+;;;takes a list of lists and returns the longest one
+(defun maxLength (l)
+  (cond ((= (length l) 1) (car l))
+	((> (length (car l)) (length (cadr l))) (maxLength (cons (car l) (cddr l))))
+	(t (maxLength (cdr l))
+    )
+  )
+)
+
+(defun makeLine (m n)
+  (cond ((< n 1) nil)
+	(t (cons (cons m (cons n nil)) (makeLine m (- n 1))))
+	)
+  )
+
+;;;construct a list of all squares given dimensions
+(defun makeMatrix (m n)
+  (cond ((< m 1) nil)
+	(t (append (makeLine m n) (makeMatrix (- m 1) n))))
+)
+
+;;;main recursive function
+(defun maxknights (m list)
+  (cond ((null m) nil)
+        ((isMember (car m) list) (maxknights (cdr m) list))
+        (t (let (
+                 (list1 (cons (car m) list))
+		 (i (caar m))
+		 (j (cadr (car m)))
+                 )
+             (setf list1 (cons (cons (- i 1) (cons (+ j 2) nil)) list1))
+             (setf list1 (cons (cons (- i 2) (cons (- j 1) nil)) list1))
+             (setf list1 (cons (cons (- i 1) (cons (- j 2) nil)) list1))
+             (setf list1 (cons (cons (+ i 1) (cons (- j 2) nil)) list1))
+             (setf list1 (cons (cons (+ i 2) (cons (- j 1) nil)) list1))
+             (setf list1 (cons (cons (+ i 1) (cons (+ j 2) nil)) list1))
+             (setf list1 (cons (cons (+ i 2) (cons (+ j 1) nil)) list1))
+             (setf list1 (cons (cons (- i 2) (cons (+ j 1) nil)) list1))
+             (let (
+                   (a1 (cons (car m) (maxknights (cdr m) list1)))
+		   (a2 (maxknights (cdr m) list))
+                   )
+               (maxLength (list a1 a2))
+               )
+             )
+           )
+        )
+  )
+
+(defun place-knights (l)
+  (maxknights (makeMatrix (caar l) (cadr (car l))) (cadr l))
+)
