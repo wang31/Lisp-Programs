@@ -1,6 +1,15 @@
-((art123 1985 (smith jones) "Sanskrit for Knowledge Representation"
+(
+(art98 1971 (nick) "wtf"
+nil)
+(art102 2000 (jazz) "nmb"
+(art98 art256))
+(art256 1995 (monas) "lol"
+(art102 art98))
+
+(art123 1985 (smith jones) "Sanskrit for Knowledge Representation"
 (art102 art256 art98))
 (art124 1997 (jones) "Sanskrit for Mobile Agents"
 (art102 art98 art123))
-(art125 8888 (jones dddd) "adfdsaga"
-(art102 art98 art123)))
+(art125 8888 (jones alex) "adfdsaga"
+(art102 art98 art123))
+)

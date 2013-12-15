@@ -39,8 +39,8 @@
 		  (citeInfo (gethash cite *zw_hash*)))
 	(cond ((null citeInfo) 0)
 		  ((isMember name (car (cdr citeInfo))) 0) ;;citation by self
-		  ((coauthorExist name (car (cdr artInfo)) (car (cdr citeInfo))) (if (> (car citeInfo) 1995) 1 2)) ;;citation by co-author(after 1995 1, before 1995 2)
-		  (t (if (> (car citeInfo) 1995) 6 4))
+		  ((coauthorExist name (car (cdr artInfo)) (car (cdr citeInfo))) (if (>= (car citeInfo) 1995) 1 2)) ;;citation by co-author(after 1995 1, before 1995 2)
+		  (t (if (>= (car citeInfo) 1995) 6 4))
 )))
 
 ;;given a person, an article that person writes, and a list of articles that cites the article
